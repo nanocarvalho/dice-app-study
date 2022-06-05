@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dice-container {
+    min-width: 200px;
+}
+
+.roll-display {
+    text-align: center;
+}
+
+.dice-selection {
+    width: 100%;
+}
+
+.dice-selection > div {
+    display: flex;
+    margin-bottom: 0.3rem;
+}
+
+.dice-selection > div > label {
+    width: 32px;
+    margin-right: 0.2rem;
+}
+
+.dice-selection > div > input {
+    width: 100%;
+}
+
+.history-list {
+    height: 200px;
+    overflow-y: scroll;
+}

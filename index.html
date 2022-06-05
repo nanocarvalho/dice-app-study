@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/main.css">
+    <script defer src="./js/app.js"></script>
+    <title>Dice Roll</title>
+</head>
+<body>
+    <!-- 2 container principais, 1 como histórico e outro como a parte da escolha e rolagem de dados -->
+    <div class="dice-container">
+        <div class="roll-display"></div>
+
+        <div class="dice-selection">
+            <div class="d20">
+                <label for="d20">D20</label>
+                <input data-js="d20" type="number" name="d20" min="0" max="12">
+            </div>
+            <div class="d12">
+                <label for="d12">D12</label>
+                <input data-js="d12" type="number" name="d12" min="0" max="12">
+            </div>
+            <div class="d6">
+                <label for="d6">D6</label>
+                <input data-js="d6" type="number" name="d6" min="0" max="12">
+            </div>
+            <div class="d4">
+                <label for="d4">D4</label>
+                <input data-js="d4" type="number" name="d4" min="0" max="12">
+            </div>
+            <button data-js="roll-btn">Roll</button>
+        </div>
+    </div>
+
+    <section class="history-container">
+        <h2>Histórico</h2>
+        <p class="total-roll"></p>
+        <ul class="history-list"></ul>
+        <button data-js="clear-history">Clear</button>
+    </section>
+    
+</body>
+</html>
