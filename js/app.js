@@ -14,19 +14,16 @@ let allHistory = []
 //let sumArray = []
 let divisor = document.createElement('li')
 
-
-
-
 document.addEventListener('DOMContentLoaded', () => {
     let localHistory = localStorage.history.split(',')
-    historyArray = localHistory
+    //let localDivisor = localStorage.diceRolled
+    historyArray = localHistory 
     updateHistory()
 })
 
 const quantityToRoll = event => {
     //reset the divisor text, to prevent continuous addition
     divisor.textContent = ''
-
     //An object to store all dices, and the respective input values of the quantity
     const dicesAvailable = {
         d20: {
@@ -46,9 +43,6 @@ const quantityToRoll = event => {
             quantity: d4.value
         }
     }
-
-    //console.log(Object.keys(dicesAvailable))
-
     //Here is just to prevent the user to add more than 12 dices to roll
     for (const key in dicesAvailable) {
         if(dicesAvailable[key].quantity > 12) {
@@ -63,19 +57,16 @@ const quantityToRoll = event => {
             const rollValue = dicesAvailable[rollKey].value
             //for some reason, the updated quantity whe exceeds 12, returns in string, and I need a number
             const rollQuantity = Number(dicesAvailable[rollKey].quantity)
-
             //after all this, I call the roll function and the function that update the divisor containing the amount of dices rolled
             rollDice(rollValue, rollQuantity) 
             updateDivisor(rollQuantity, rollValue)  
         }
-    }
-
-    updateHistory()
+    } 
 }
 
 //With my actual knowledge, this is the best that I can do to prevent a hole bunch of ifs
 //This basically updates visual, for the user input
-//So, if the user puts more than 12, the input returns to 12
+//So, if the user puts more than 12, the input field returns to 12
 const updateInputField = dice => {
     const diceToUpdate = `d${dice}`
     switch(diceToUpdate) {
@@ -100,24 +91,15 @@ const rollDice = (dice, quantity) => {
         let diceRolled = Math.ceil(Math.random() * dice)
         //I think this method is a little hard to read, for a beginner, but, it's more maintainable for sure
         historyArray.push(`D${dice}: ${diceRolled}`)
-        allHistory.push(`D${dice}: ${diceRolled}`)
-  
         //TODO sum all
         //sumArray.push(diceRolled)
     }  
-
-
-
+    updateHistory()
 }
 
 const localUpdate = () => {
-    //For now this only saves the last roll, not all.
-    //I guess that, if I wanna to save all, I'll need to create a variable to store every single roll
-    //Yes tested and working with that. I don't know if its the best choice, but for now, works without problems
-    //local storage test
+    allHistory.push(historyArray)
     localStorage.setItem('history', allHistory)
-    //to test with the local storage
-    allHistory.push('---*---')
 }
 
 //History section
@@ -128,16 +110,16 @@ const updateDivisor = (quantity, value) => {
     //for(let index = 0; index < historyArray.length; index++) {
         //sum = sum + sumArray[index]      
     //}
-   
     divisor.textContent += `|${quantity} D${value} `
+    //localStorage.setItem('diceRolled', divisor.textContent)
     //totalRoll.textContent = `The total is ${sum}`
 
 }
 
 //update the history list
 const updateHistory = () => {
-    localUpdate()
     historyList.appendChild(divisor)
+	localUpdate()
     
     historyArray.forEach(item => {
         let diceLi = document.createElement('li')
@@ -158,7 +140,8 @@ const clearHistoryList = () => {
         let firstChild = historyList.firstElementChild
         historyList.removeChild(firstChild)
     }
-    localStorage.setItem('history', [])
+    localStorage.setItem('history', '')
+    localStorage.setItem('diceRolled', '')
 }
 
 //Listeners
