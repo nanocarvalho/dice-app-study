@@ -79,3 +79,9 @@ li {
 .history-container button {
     margin-top: 0.5rem;
 }
+
+@media (min-width: 768px) {
+    body {
+        justify-content: center;
+    }
+}
