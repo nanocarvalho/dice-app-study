@@ -3,29 +3,35 @@ const historyList = document.querySelector('.history-list')
 const totalRoll = document.querySelector('.total-roll')
 const rollBtn = document.querySelector('[data-js="roll-btn"]')
 const clearHistory = document.querySelector('[data-js="clear-history"]')
+//Dices
+const d100 = document.querySelector('[data-js="d100"]')
 const d20 = document.querySelector('[data-js="d20"]')
 const d12 = document.querySelector('[data-js="d12"]')
+const d10 = document.querySelector('[data-js="d10"]')
+const d8 = document.querySelector('[data-js="d8"]')
 const d6 = document.querySelector('[data-js="d6"]')
 const d4 = document.querySelector('[data-js="d4"]')
 
 let historyArray = []
 let allHistory = []
-//TODO sum all
-//let sumArray = []
-let divisor = document.createElement('li')
 
+//Split the localstorage array to get every single one
 document.addEventListener('DOMContentLoaded', () => {
+    if(!localStorage.history) {
+        return
+    }
     let localHistory = localStorage.history.split(',')
-    //let localDivisor = localStorage.diceRolled
-    historyArray = localHistory 
+    historyArray = localHistory
     updateHistory()
 })
 
 const quantityToRoll = event => {
-    //reset the divisor text, to prevent continuous addition
-    divisor.textContent = ''
     //An object to store all dices, and the respective input values of the quantity
     const dicesAvailable = {
+        d100: {
+            value: 100,
+            quantity: d100.value
+        },
         d20: {
             value: 20,
             quantity: d20.value
@@ -33,6 +39,14 @@ const quantityToRoll = event => {
         d12: {
             value: 12,
             quantity: d12.value
+        },
+        d10: {
+            value: 10,
+            quantity: d10.value
+        },
+        d8: {
+            value: 8,
+            quantity: d8.value
         },
         d6: {
             value: 6,
@@ -58,8 +72,7 @@ const quantityToRoll = event => {
             //for some reason, the updated quantity whe exceeds 12, returns in string, and I need a number
             const rollQuantity = Number(dicesAvailable[rollKey].quantity)
             //after all this, I call the roll function and the function that update the divisor containing the amount of dices rolled
-            rollDice(rollValue, rollQuantity) 
-            updateDivisor(rollQuantity, rollValue)  
+            rollDice(rollValue, rollQuantity)   
         }
     } 
 }
@@ -76,6 +89,15 @@ const updateInputField = dice => {
         case 'd12':
             d12.value = 12
             break
+        case 'd10':
+            d10.value = 12
+            break
+        case 'd100':
+            d100.value = 12
+            break
+        case 'd8':
+            d8.value = 12
+            break
         case 'd6':
             d6.value = 12
             break
@@ -91,34 +113,19 @@ const rollDice = (dice, quantity) => {
         let diceRolled = Math.ceil(Math.random() * dice)
         //I think this method is a little hard to read, for a beginner, but, it's more maintainable for sure
         historyArray.push(`D${dice}: ${diceRolled}`)
-        //TODO sum all
-        //sumArray.push(diceRolled)
+        allHistory.push(`D${dice}: ${diceRolled}`)
     }  
     updateHistory()
 }
 
 const localUpdate = () => {
-    allHistory.push(historyArray)
+
     localStorage.setItem('history', allHistory)
 }
 
-//History section
-//change the divisor text to update visual
-const updateDivisor = (quantity, value) => {
-    //TODO sum all
-    //let sum = 0
-    //for(let index = 0; index < historyArray.length; index++) {
-        //sum = sum + sumArray[index]      
-    //}
-    divisor.textContent += `|${quantity} D${value} `
-    //localStorage.setItem('diceRolled', divisor.textContent)
-    //totalRoll.textContent = `The total is ${sum}`
-
-}
 
 //update the history list
 const updateHistory = () => {
-    historyList.appendChild(divisor)
 	localUpdate()
     
     historyArray.forEach(item => {
@@ -127,10 +134,13 @@ const updateHistory = () => {
         historyList.appendChild(diceLi)   
     })
 
+    let divisor = document.createElement('li')
+    divisor.textContent = '------'
+    historyList.appendChild(divisor)
+
     //Clears the array after the roll, to prevent adding to just one forever
     historyArray = []
-    //TODO sum all
-    //sumArray = []
+    
 }
 
 //clear the history list

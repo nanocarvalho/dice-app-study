@@ -8,37 +8,74 @@ body {
     min-height: 100vh;
     min-width: 100%;
     display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+/* Basic styles */
+button {
+    padding: 0.7rem;
+    border: none;
+    background-color: rebeccapurple;
+    color: #fff;
+    transition: all 0.2s ease-out;
+}
+
+button:hover {
+    background-color: rgb(61, 36, 128);
+}
+
+li {
+    list-style: none;
+}
+
+/* Dice container */
+.dice-container {
+    max-width: 95%;
+    margin: 0 auto;
+}
+
+/* Dice selection */
+.dice-selection {
+    padding: 1rem;
+    display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.dice-container {
-    min-width: 200px;
-}
-
-.roll-display {
-    text-align: center;
-}
-
-.dice-selection {
-    width: 100%;
+    flex-wrap: wrap;
 }
 
 .dice-selection > div {
     display: flex;
-    margin-bottom: 0.3rem;
-}
-
-.dice-selection > div > label {
-    width: 32px;
-    margin-right: 0.2rem;
+    flex-direction: column;
+    width: 64px;
+    text-align: center;
+    margin: 0.7rem;
 }
 
 .dice-selection > div > input {
-    width: 100%;
+    padding: 0.5rem;
 }
 
-.history-list {
-    height: 200px;
+.dice-selection > button {
+    margin-top: 1rem;
+}
+
+/* History container */
+.history-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.history-container ul {
+
+    max-height: 200px;
+    min-width: 100px;
     overflow-y: scroll;
+}
+
+.history-container button {
+    margin-top: 0.5rem;
 }
