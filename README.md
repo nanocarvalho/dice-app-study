@@ -1,6 +1,6 @@
 ## A simple dice app, to study LocalStorage.
 The dices available is: D100, D20, D12, D10, D8, D6, D4
-[Live version](dice-app-study.pages.dev)
+[Live version](https://dice-app-study.pages.dev/)
 
 - Nesse eu sofri um tanto para resolver o If hell que ia acontecer pela necessidade de checagens que eu tava fazendo haha. A conclusão foi a seguinte:
     - Usar um objeto para guardar cada dado que eu quiser
