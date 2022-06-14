@@ -81,6 +81,9 @@ li {
     margin-top: 0.5rem;
 }
 
+footer {
+	padding-top: 10rem;
+}
 @media (min-width: 768px) {
     body {
         justify-content: center;
